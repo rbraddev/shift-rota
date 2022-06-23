@@ -4,7 +4,6 @@ import (
 	"flag"
 	"fmt"
 	"os"
-	"strconv"
 	"sync"
 
 	"github.com/rbraddev/shift-rota/internal/database"
@@ -71,12 +70,6 @@ func main() {
 		db:     db,
 		logger: logger,
 	}
-
-	logger.Info("starting server on %s (version %s)", map[string]string{
-		"port":    strconv.Itoa(cfg.port),
-		"env":     cfg.env,
-		"version": version.Get(),
-	})
 
 	err = app.Run(cfg.port, app.routes())
 	if err != nil {

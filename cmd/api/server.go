@@ -9,6 +9,8 @@ import (
 	"os/signal"
 	"syscall"
 	"time"
+
+	"github.com/rbraddev/shift-rota/internal/version"
 )
 
 func (app *application) Run(port int, h http.Handler) error {
@@ -48,8 +50,9 @@ func (app *application) Run(port int, h http.Handler) error {
 	}()
 
 	app.logger.Info("starting server", map[string]string{
-		"addr": srv.Addr,
-		"env":  app.config.env,
+		"addr":    srv.Addr[1:],
+		"env":     app.config.env,
+		"version": version.Get(),
 	})
 
 	err := srv.ListenAndServe()
