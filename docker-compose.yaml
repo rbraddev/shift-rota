@@ -1,0 +1,36 @@
+version: '3.8'
+services:
+  db:
+    container_name: rota-db
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_DB: rota
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - '5432:5432'
+    networks:
+      - rota
+    volumes: 
+      - rota:/var/lib/postgresql/data
+
+  api:
+    build: .
+    container_name: rota-api
+    command: /opt/app/app
+    environment:
+      DB_DSN: postgres://postgres:postgres@db/rota?sslmode=disable
+    ports:
+      - "4000:4000"
+    depends_on:
+      - db
+    networks:
+      - rota
+
+volumes:
+  rota:
+
+networks:
+  rota:
+    driver: bridge
