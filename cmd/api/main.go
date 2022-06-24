@@ -6,6 +6,7 @@ import (
 	"os"
 	"sync"
 
+	"github.com/rbraddev/shift-rota/internal/data"
 	"github.com/rbraddev/shift-rota/internal/database"
 	"github.com/rbraddev/shift-rota/internal/log"
 	"github.com/rbraddev/shift-rota/internal/version"
@@ -28,7 +29,7 @@ type config struct {
 
 type application struct {
 	config config
-	db     *database.DB
+	models data.Models
 	logger *log.Logger
 	wg     sync.WaitGroup
 }
@@ -67,7 +68,7 @@ func main() {
 
 	app := &application{
 		config: cfg,
-		db:     db,
+		models: data.NewModels(db),
 		logger: logger,
 	}
 

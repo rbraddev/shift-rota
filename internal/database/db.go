@@ -7,6 +7,7 @@ import (
 
 	"github.com/golang-migrate/migrate/v4"
 	"github.com/golang-migrate/migrate/v4/source/iofs"
+
 	"github.com/jmoiron/sqlx"
 
 	_ "github.com/golang-migrate/migrate/v4/database/postgres"

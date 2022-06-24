@@ -14,7 +14,13 @@ func (app *application) routes() http.Handler {
 
 	mux.Use(app.recoverPanic)
 
-	mux.HandleFunc("/status", app.healthcheckHandler, "GET")
+	mux.HandleFunc("/healthcheck", app.healthcheckHandler, "GET")
+
+	mux.HandleFunc("/teams", app.createTeamHandler, "POST")
+	mux.HandleFunc("/teams", app.listTeamsHandler, "GET")
+	mux.HandleFunc("/teams/:id", app.getTeamHandler, "GET")
+	mux.HandleFunc("/teams/:id", app.updateTeamHandler, "PATCH")
+	mux.HandleFunc("/teams/:id", app.deleteTeamHandler, "DELETE")
 
 	return mux
 }
