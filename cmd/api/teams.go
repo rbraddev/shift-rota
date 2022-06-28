@@ -55,7 +55,7 @@ func (app *application) getTeamHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	movie, err := app.models.Teams.Get(id)
+	team, err := app.models.Teams.Get(id)
 	if err != nil {
 		switch {
 		case errors.Is(err, data.ErrRecordNotFound):
@@ -66,7 +66,7 @@ func (app *application) getTeamHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = response.JSONWithHeaders(w, http.StatusOK, envelope{"movie": movie}, nil)
+	err = response.JSONWithHeaders(w, http.StatusOK, envelope{"team": team}, nil)
 	if err != nil {
 		app.serverError(w, r, err)
 	}

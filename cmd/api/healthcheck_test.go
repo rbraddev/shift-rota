@@ -13,7 +13,7 @@ func TestHealthCheck(t *testing.T) {
 	ts := newTestServer(t, app.routes())
 	defer ts.Close()
 
-	code, _, body := ts.get(t, "/healthcheck")
+	code, _, body := ts.get(t, "/api/v1/healthcheck")
 
 	assert.Equal(t, code, http.StatusOK)
 
