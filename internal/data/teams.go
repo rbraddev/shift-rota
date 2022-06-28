@@ -11,6 +11,14 @@ import (
 	"github.com/rbraddev/shift-rota/internal/validator"
 )
 
+type TeamModelInterface interface {
+	Get(id int64) (*Team, error)
+	Insert(team *Team) error
+	Delete(id int64) error
+	GetAll(name string, filters Filters) ([]*Team, Metadata, error)
+	Update(team *Team) error
+}
+
 type Team struct {
 	ID      int64  `json:"id"`
 	Name    string `json:"name"`

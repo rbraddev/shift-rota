@@ -12,7 +12,7 @@ var (
 )
 
 type Models struct {
-	Teams TeamModel
+	Teams TeamModelInterface
 }
 
 func NewModels(db *database.DB) Models {
