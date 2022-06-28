@@ -51,3 +51,22 @@ func (ts *testServer) get(t *testing.T, urlPath string) (int, http.Header, strin
 
 	return rs.StatusCode, rs.Header, string(body)
 }
+
+func (ts *testServer) delete(t *testing.T, urlPath string) (int, http.Header, string) {
+	req, err := http.NewRequest("DELETE", ts.URL+urlPath, nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	rs, err := ts.Client().Do(req)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	body, err := io.ReadAll(rs.Body)
+	if err != nil {
+		t.Fatal(err)
+	}
+	bytes.TrimSpace(body)
+
+	return rs.StatusCode, rs.Header, string(body)
+}
